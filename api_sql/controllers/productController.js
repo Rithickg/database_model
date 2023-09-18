@@ -7,6 +7,7 @@ const generate_products = async (req, res) => {
         const products = []
         for (let i = 0; i < 10; i++) {
             const fakeProduct = {
+                email: faker.internet.email({ allowSpecialCharacters: true }),
                 image: faker.image.urlLoremFlickr({
                     height: 320,
                     width: 320,
@@ -43,12 +44,12 @@ const generate_products = async (req, res) => {
             products.push(fakeProduct)
         }
 
-        await Product.insertMany(products)
+        const newProducts = await Product.bulkCreate(products)
         console.log("Generated and saved 10 fake products.")
 
         res.status(200).json({
             message: "Product generated successfully",
-            products
+            products: newProducts
         })
     } catch (error) {
         console.log(error)

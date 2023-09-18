@@ -7,7 +7,8 @@ const sequelize = new Sequelize({
     port: process.env.POSTGRES_PORT,
     username: 'postgres',
     password: process.env.POSTGRES_PASS || "Rithickg567@",
-    database: 'test_sql'
+    database: 'test_sql',
+    logging: false
 })
 
 const DbConnection = async () => {

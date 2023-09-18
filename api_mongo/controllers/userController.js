@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import User from '../models/User.js'
 
-const generate_user = async (req, res) => {
+const generate_users = async (req, res) => {
     try {
         const users = []
         for (let i = 0; i < 10; i++) {
@@ -32,4 +32,19 @@ const generate_user = async (req, res) => {
     }
 }
 
-export { generate_user }
+const view_users = async (req, res) => {
+    try {
+        const users = await User.findAll()
+        res.status(200).json({
+            message: "Users found",
+            users
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Error finding the users..."
+        })
+    }
+}
+
+export { generate_users, view_users }
